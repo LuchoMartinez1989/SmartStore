@@ -9,10 +9,25 @@
 </div>
 
 <h2>Portatil</h2>
-<div>
- {{portatil.marca | uppercase}} 
+<div *ngIf="!portatiles">
+  <img src="../assets/Media/Gif/loading.gif" />
+  
+</div>
+<div *ngIf="portatiles?.length===0"> <!-- el operador interrogante nos permite evitar el error de undefined -->
+  <p>No hay equipos para mostrar</p>
 
 </div>
-<div>{{portatil.fechaLanzamiento | date:"dd-mm-yyyy"}}</div>
-<div>{{portatil.precio | currency}}</div>
+
+<div *ngIf="portatiles && portatiles.length > 0">
+  <div *ngFor="let portatil of portatiles;let index = index" class="portatiles-contenedor">
+    <div>
+      Portatil: {{index}}:{{portatil.marca }}
+
+    </div>
+    <div>{{portatil.fechaLanzamiento | date:"dd-mm-yyyy"}}</div>
+    <div>{{portatil.precio | currency}}</div>
+  </div>
+</div>
+
+
 
